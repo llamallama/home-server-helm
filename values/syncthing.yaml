@@ -1,0 +1,33 @@
+name: syncthing
+replicas: 1
+image:
+  repository: syncthing/syncthing
+  pullPolicy: IfNotPresent
+  tag: 1.12
+ports:
+  - containerPort: 22000
+    hostPort: 22000
+    protocol: TCP
+    name: tcp22000
+  - containerPort: 8384
+    hostPort: 8384
+    protocol: TCP
+    name: tcp8384
+volumeMounts:
+  - mountPath: /var/syncthing
+    name: syncthing
+    subPath: syncthing/var/syncthing
+  - mountPath: /mnt/sync
+    name: sync
+volumes:
+  - name: syncthing
+    persistentVolumeClaim:
+      claimName: assload
+  - name: sync
+    persistentVolumeClaim:
+      claimName: sync
+resources:
+  limits:
+    cpu: 500m
+ingress:
+  enabled: false

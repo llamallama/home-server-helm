@@ -1,0 +1,28 @@
+name: mariadb
+replicas: 1
+nodeName: k3s-node1
+image:
+  repository: mariadb
+  pullPolicy: IfNotPresent
+  tag: 10.5.8
+ports:
+  - containerPort: 3306
+    protocol: TCP
+    name: tcp3306
+volumeMounts:
+  - mountPath: /var/lib/mysql
+    name: mysql
+    subPath: mysql
+volumes:
+  - name: mysql
+    persistentVolumeClaim:
+      claimName: local
+env:
+  - name: MYSQL_ROOT_PASSWORD
+    valueFrom:
+      secretKeyRef:
+        key: MYSQL_ROOT_PASSWORD
+        name: mysql
+        optional: false
+ingress:
+  enabled: false

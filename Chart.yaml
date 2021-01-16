@@ -1,0 +1,6 @@
+---
+apiVersion: v2
+name: home_server
+description: This deploys all of my home server services
+type: application
+version: 0.0.1

@@ -1,0 +1,38 @@
+name: airsonic
+replicas: 1
+image:
+  repository: linuxserver/airsonic
+  pullPolicy: IfNotPresent
+  tag: version-v10.6.2
+ports:
+  - containerPort: 4040
+    protocol: TCP
+    name: tcp4040
+volumeMounts:
+  - name: config
+    mountPath: /config
+    subPath: airsonic/config
+  - name: music
+    mountPath: /music
+volumes:
+  - name: config
+    persistentVolumeClaim:
+      claimName: assload
+  - name: music
+    persistentVolumeClaim:
+      claimName: music
+ingress:
+  enabled: true
+  annotations:
+    kubernetes.io/ingress.class: traefik
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+  hosts:
+    - host: airsonic.pipetogrep.org
+      paths:
+        - path: /
+          pathType: Prefix
+          port: 4040
+  tls:
+    - secretName: airsonic-pipetogrep-org-tls
+      hosts:
+        - airsonic.pipetogrep.org

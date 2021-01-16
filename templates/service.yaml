@@ -1,0 +1,15 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.name }}
+spec:
+  selector:
+    app: {{ .Values.name }}
+  ports:
+    {{- range .Values.ports}}
+    - protocol: {{ .protocol | default "TCP" }}
+      port: {{ .containerPort }}
+      targetPort: {{ .targetPort | default .containerPort }}
+      name: {{ .containerPort }}-{{ .protocol | default "TCP" | lower }}-{{ .targetPort | default .containerPort }}
+    {{- end }}

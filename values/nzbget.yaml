@@ -1,0 +1,47 @@
+name: nzbget
+replicas: 1
+image:
+  repository: linuxserver/nzbget
+  pullPolicy: IfNotPresent
+  tag: version-v21.0
+ports:
+  - containerPort: 6789
+    protocol: TCP
+volumeMounts:
+  - name: config
+    mountPath: /config
+    subPath: nzbget/config
+  - name: downloads
+    mountPath: /downloads
+volumes:
+  - name: config
+    persistentVolumeClaim:
+      claimName: assload
+  - name: downloads
+    persistentVolumeClaim:
+      claimName: downloads
+env:
+  - name: PGID
+    value: "10000"
+  - name: PUID
+    value: "10000"
+  - name: TZ
+    value: America/New_York
+resources:
+  limits:
+    cpu: 500m
+ingress:
+  enabled: true
+  annotations:
+    kubernetes.io/ingress.class: traefik
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+  hosts:
+    - host: download.pipetogrep.org
+      paths:
+        - path: /
+          pathType: Prefix
+          port: 6789
+  tls:
+    - secretName: download-pipetogrep-org-tls
+      hosts:
+        - download.pipetogrep.org

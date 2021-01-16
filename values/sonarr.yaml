@@ -1,0 +1,48 @@
+name: sonarr
+replicas: 1
+nodeName: k3s-node1
+image:
+  repository: linuxserver/sonarr
+  pullPolicy: IfNotPresent
+  tag: version-2.0.0.5344
+ports:
+  - containerPort: 8989
+    protocol: TCP
+volumeMounts:
+  - mountPath: /downloads
+    name: downloads
+  - mountPath: /tv
+    name: downloads
+    subPath: tv
+  - mountPath: /config
+    name: config
+    subPath: sonarr
+volumes:
+  - name: downloads
+    persistentVolumeClaim:
+      claimName: downloads
+  - name: config
+    persistentVolumeClaim:
+      claimName: local
+env:
+  - name: PGID
+    value: "10000"
+  - name: PUID
+    value: "10000"
+  - name: TZ
+    value: America/New_York
+ingress:
+  enabled: true
+  annotations:
+    kubernetes.io/ingress.class: traefik
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+  hosts:
+    - host: tv.pipetogrep.org
+      paths:
+        - path: /
+          pathType: Prefix
+          port: 8989
+  tls:
+    - secretName: tv-pipetogrep-org-tls
+      hosts:
+        - tv.pipetogrep.org

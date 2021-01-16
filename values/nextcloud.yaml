@@ -1,0 +1,44 @@
+name: nextcloud
+replicas: 1
+image:
+  repository: nextcloud
+  pullPolicy: IfNotPresent
+  tag: 20.0.2
+ports:
+  - containerPort: 80
+    name: tcp80
+    protocol: TCP
+volumeMounts:
+  - mountPath: /var/www/html
+    name: html
+    subPath: nextcloud/html
+  - mountPath: /nextcloud
+    name: nextcloud-storage
+  - mountPath: /downloads
+    name: downloads
+    readOnly: true
+volumes:
+  - name: html
+    persistentVolumeClaim:
+      claimName: assload
+  - name: nextcloud-storage
+    persistentVolumeClaim:
+      claimName: nextcloud
+  - name: downloads
+    persistentVolumeClaim:
+      claimName: downloads
+ingress:
+  enabled: true
+  annotations:
+    kubernetes.io/ingress.class: traefik
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+  hosts:
+    - host: cloud.pipetogrep.org
+      paths:
+        - path: /
+          pathType: Prefix
+          port: 80
+  tls:
+    - secretName: cloud-pipetogrep-org-tls
+      hosts:
+        - cloud.pipetogrep.org

@@ -1,0 +1,36 @@
+name: privatebin
+replicas: 1
+image:
+  repository: privatebin/nginx-fpm-alpine
+  pullPolicy: IfNotPresent
+  tag: 1.3.4
+ports:
+  - containerPort: 8080
+    protocol: TCP
+    name: tcp8080
+volumeMounts:
+  - name: data
+    mountPath: /srv/data
+    subPath: privatebin/data
+  - name: data
+    mountPath: /srv/cfg
+    subPath: privatebin/cfg
+volumes:
+  - name: data
+    persistentVolumeClaim:
+      claimName: assload
+ingress:
+  enabled: true
+  annotations:
+    kubernetes.io/ingress.class: traefik
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+  hosts:
+    - host: paste.pipetogrep.org
+      paths:
+        - path: /
+          pathType: Prefix
+          port: 8080
+  tls:
+    - secretName: paste-pipetogrep-org-tls
+      hosts:
+        - paste.pipetogrep.org

@@ -1,0 +1,13 @@
+eaf01e27a1f06bc36b5d4e0e96fb352656771fe2  ./templates/ingress.yaml
+4f43a9216ff28bb9649c17562c3178486a328383  ./templates/deployment.yaml
+54ac65fae69a221c4188354f0c9d07b67351eacb  ./templates/service.yaml
+a4c04ed02d25c1b06d6394ec78e62cd01acc5238  ./Chart.yaml
+df1e74072dd19357842577842385457de4fb27af  ./values/radarr.yaml
+fc3d76a92450b6492a6c593f2cfa8468d3c9ec40  ./values/privatebin.yaml
+d246f47532d2ba559ba4e846bfeadc5d9e8b71e5  ./values/nextcloud.yaml
+c6047cade498185daf95934037abb74c2f656f95  ./values/syncthing.yaml
+3b2bdd416451b3205a644813d0cdc8658d613f69  ./values/unifi.yaml
+8f9250115fbb0302b06921186308e04edbf812fc  ./values/nzbget.yaml
+b86c96221926eb5aa9cca13086c86e01785a2e2f  ./values/sonarr.yaml
+4e174be3c610ca7b55188b65e13009556fe46be1  ./values/mariadb.yaml
+0888355fa3d82cf91530f97afb8c3aaa5890b0f5  ./values/airsonic.yaml
