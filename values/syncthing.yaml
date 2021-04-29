@@ -28,6 +28,6 @@ volumes:
       claimName: sync
 resources:
   limits:
-    cpu: 500m
+    cpu: 1000m
 ingress:
   enabled: false
