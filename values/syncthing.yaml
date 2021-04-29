@@ -3,7 +3,7 @@ replicas: 1
 image:
   repository: syncthing/syncthing
   pullPolicy: IfNotPresent
-  tag: 1.12
+  tag: 1.15
 ports:
   - containerPort: 22000
     hostPort: 22000
