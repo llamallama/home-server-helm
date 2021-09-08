@@ -4,7 +4,7 @@ nodeName: k3s-node1
 image:
   repository: linuxserver/radarr
   pullPolicy: IfNotPresent
-  tag: version-3.0.2.4552
+  tag: version-3.2.2.5080
 ports:
   - containerPort: 7878
     protocol: TCP

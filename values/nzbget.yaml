@@ -3,7 +3,7 @@ replicas: 1
 image:
   repository: linuxserver/nzbget
   pullPolicy: IfNotPresent
-  tag: version-v21.0
+  tag: version-v21.1
 ports:
   - containerPort: 6789
     protocol: TCP
