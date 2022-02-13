@@ -1,0 +1,40 @@
+name: plex
+replicas: 1
+image:
+  repository: linuxserver/plex
+  pullPolicy: IfNotPresent
+  tag: 1.25.1
+strategy: Recreate
+ports:
+  - containerPort: 32400
+    hostPort: 32400
+    protocol: TCP
+    name: tcp32400
+pvc:
+  enabled: true
+  name: longhorn-plex-pvc
+  storageClassName: longhorn
+  size: 50Gi
+  accessModes:
+    - ReadWriteOnce
+volumeMounts:
+  - mountPath: /downloads
+    name: downloads
+  - mountPath: /config
+    name: config
+volumes:
+  - name: downloads
+    persistentVolumeClaim:
+      claimName: downloads
+  - name: config
+    persistentVolumeClaim:
+      claimName: longhorn-plex-pvc
+env:
+  - name: PGID
+    value: "10000"
+  - name: PUID
+    value: "10000"
+  - name: TZ
+    value: America/New_York
+ingress:
+  enabled: false
