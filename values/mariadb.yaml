@@ -4,7 +4,7 @@ nodeName: k3s-node1
 image:
   repository: mariadb
   pullPolicy: IfNotPresent
-  tag: 10.6.0
+  tag: 10.7.1
 ports:
   - containerPort: 3306
     protocol: TCP
@@ -27,4 +27,6 @@ env:
         name: mysql
         optional: false
 ingress:
+  enabled: false
+pvc:
   enabled: false

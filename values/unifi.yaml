@@ -4,7 +4,7 @@ nodeName: k3s-node1
 image:
   repository: linuxserver/unifi-controller
   pullPolicy: IfNotPresent
-  tag: version-6.1.71
+  tag: 6.5.55
 strategy: Recreate
 ports:
   - containerPort: 3478
@@ -32,4 +32,6 @@ volumes:
     persistentVolumeClaim:
       claimName: local
 ingress:
+  enabled: false
+pvc:
   enabled: false

@@ -4,7 +4,7 @@ nodeName: k3s-master
 image:
   repository: linuxserver/syncthing
   pullPolicy: IfNotPresent
-  tag: v1.18.0-ls57 
+  tag: 1.19.0 
 ports:
   - containerPort: 22000
     hostPort: 22000
@@ -42,4 +42,6 @@ resources:
   limits:
     cpu: 1000m
 ingress:
+  enabled: false
+pvc:
   enabled: false

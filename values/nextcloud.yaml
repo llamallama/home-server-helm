@@ -3,7 +3,7 @@ replicas: 1
 image:
   repository: nextcloud
   pullPolicy: IfNotPresent
-  tag: 23.0.0
+  tag: 23.0.1
 ports:
   - containerPort: 80
     name: tcp80
@@ -42,3 +42,5 @@ ingress:
     - secretName: cloud-pipetogrep-org-tls
       hosts:
         - cloud.pipetogrep.org
+pvc:
+  enabled: false
