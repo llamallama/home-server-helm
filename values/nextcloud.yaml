@@ -3,7 +3,7 @@ replicas: 1
 image:
   repository: nextcloud
   imagePullPolicy: IfNotPresent
-  tag: 23.0.1
+  tag: 23.0.2
 ports:
   - containerPort: 80
     name: tcp80
