@@ -3,7 +3,7 @@ replicas: 1
 nodeName: k3s-node1
 image:
   repository: linuxserver/radarr
-  pullPolicy: IfNotPresent
+  imagePullPolicy: IfNotPresent
   tag: 4.0.4
 ports:
   - containerPort: 7878

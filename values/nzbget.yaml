@@ -2,7 +2,7 @@ name: nzbget
 replicas: 1
 image:
   repository: linuxserver/nzbget
-  pullPolicy: IfNotPresent
+  imagePullPolicy: IfNotPresent
   tag: 21.1.20220210
 ports:
   - containerPort: 6789

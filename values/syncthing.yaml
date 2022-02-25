@@ -3,7 +3,7 @@ replicas: 1
 nodeName: k3s-master
 image:
   repository: linuxserver/syncthing
-  pullPolicy: IfNotPresent
+  imagePullPolicy: IfNotPresent
   tag: 1.19.0 
 ports:
   - containerPort: 22000
