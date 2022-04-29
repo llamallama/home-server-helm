@@ -1,22 +1,25 @@
 name: nextcloud
 replicas: 1
+strategy: Recreate
 image:
   repository: nextcloud
   imagePullPolicy: IfNotPresent
-  tag: 23.0.2
+  tag: 23.0.3
 ports:
   - containerPort: 80
     name: tcp80
     protocol: TCP
 volumeMounts:
-  - mountPath: /var/www/html
-    name: html
-    subPath: nextcloud/html
+  # - mountPath: /var/www/html_old
+  #   name: html
+  #   subPath: nextcloud/html
   - mountPath: /nextcloud
     name: nextcloud-storage
   - mountPath: /downloads
     name: downloads
     readOnly: true
+  - mountPath: /var/www/html
+    name: longhorn
 volumes:
   - name: html
     persistentVolumeClaim:
@@ -27,6 +30,9 @@ volumes:
   - name: downloads
     persistentVolumeClaim:
       claimName: downloads
+  - name: longhorn
+    persistentVolumeClaim:
+      claimName: longhorn-nextcloud
 ingress:
   enabled: true
   annotations:
