@@ -1,6 +1,6 @@
 name: syncthing
 replicas: 1
-nodeName: k3s-master
+strategy: Recreate
 image:
   repository: linuxserver/syncthing
   imagePullPolicy: IfNotPresent

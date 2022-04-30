@@ -2,7 +2,12 @@
 
 set -eu -o pipefail
 
-timeout='60'
+if [[ "${1:-}" == "diff" ]]; then
+  mode='diff'
+else
+  mode='apply'
+fi
+timeout='120'
 master_node='k3s-master'
 
 cur_hashes="$(kubectl get node "$master_node" -o jsonpath='{.metadata.annotations.home-server-hashes}')"
@@ -34,8 +39,12 @@ do
   if ! compare_hash "$yaml" || [[ "${deploy_all:-}" == true ]]
   then
     name=$(grep '^name:' "$yaml" | awk '{print $2}')
-    helm upgrade --install --atomic --timeout="${timeout}s" -f "$yaml" "$name" .
-    made_changes=true
+    if [[ "$mode" == 'apply' ]]; then
+      helm upgrade --install --atomic --timeout="${timeout}s" -f "$yaml" "$name" .
+      made_changes=true
+    elif [[ "$mode" == 'diff' ]]; then
+      helm diff upgrade -f "$yaml" "$name" .
+    fi
   fi
 done
 

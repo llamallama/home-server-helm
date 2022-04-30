@@ -21,9 +21,9 @@ volumeMounts:
   - mountPath: /var/www/html
     name: longhorn
 volumes:
-  - name: html
-    persistentVolumeClaim:
-      claimName: assload
+  # - name: html
+  #   persistentVolumeClaim:
+  #     claimName: assload
   - name: nextcloud-storage
     persistentVolumeClaim:
       claimName: nextcloud
@@ -49,4 +49,8 @@ ingress:
       hosts:
         - cloud.pipetogrep.org
 pvc:
-  enabled: false
+  enabled: true
+  name: longhorn-nextcloud
+  storageClassName: longhorn
+  accessModes:
+    - ReadWriteOnce

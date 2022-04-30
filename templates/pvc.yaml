@@ -7,7 +7,7 @@ metadata:
 spec:
   accessModes:
     {{ .Values.pvc.accessModes }}
-  storageClassName: {{ .Values.pvc.storageClassName | default "" }}
+  storageClassName: {{ .Values.pvc.storageClassName }}
   resources:
     requests:
       storage: {{ .Values.pvc.size | default "10Gi" }}
