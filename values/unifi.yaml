@@ -1,6 +1,6 @@
 name: unifi
 replicas: 1
-nodeName: k3s-node1
+strategy: Recreate
 image:
   repository: linuxserver/unifi-controller
   imagePullPolicy: IfNotPresent
@@ -25,13 +25,17 @@ ports:
     protocol: TCP
 volumeMounts:
   - mountPath: /config
-    name: config
-    subPath: unifi/config
+    name: longhorn
 volumes:
-  - name: config
+  - name: longhorn
     persistentVolumeClaim:
-      claimName: local
+      claimName: longhorn-unifi
 ingress:
   enabled: false
 pvc:
-  enabled: false
+  enabled: true
+  name: longhorn-unifi
+  storageClassName: longhorn
+  size: 2Gi
+  accessModes:
+    - ReadWriteOnce

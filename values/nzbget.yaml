@@ -1,5 +1,6 @@
 name: nzbget
 replicas: 1
+strategy: Recreate
 image:
   repository: linuxserver/nzbget
   imagePullPolicy: IfNotPresent

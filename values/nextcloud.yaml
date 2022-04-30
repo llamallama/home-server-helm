@@ -10,9 +10,6 @@ ports:
     name: tcp80
     protocol: TCP
 volumeMounts:
-  # - mountPath: /var/www/html_old
-  #   name: html
-  #   subPath: nextcloud/html
   - mountPath: /nextcloud
     name: nextcloud-storage
   - mountPath: /downloads
@@ -21,9 +18,6 @@ volumeMounts:
   - mountPath: /var/www/html
     name: longhorn
 volumes:
-  # - name: html
-  #   persistentVolumeClaim:
-  #     claimName: assload
   - name: nextcloud-storage
     persistentVolumeClaim:
       claimName: nextcloud
