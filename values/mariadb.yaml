@@ -4,7 +4,7 @@ strategy: Recreate
 image:
   repository: mariadb
   imagePullPolicy: IfNotPresent
-  tag: 10.7.1
+  tag: 10.7.3
 ports:
   - containerPort: 3306
     protocol: TCP

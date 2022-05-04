@@ -4,7 +4,7 @@ strategy: Recreate
 image:
   repository: linuxserver/syncthing
   imagePullPolicy: IfNotPresent
-  tag: 1.19.0 
+  tag: 1.19.2
 ports:
   - containerPort: 22000
     hostPort: 22000
