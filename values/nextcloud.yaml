@@ -9,6 +9,12 @@ ports:
   - containerPort: 80
     name: tcp80
     protocol: TCP
+lifecycle:
+  postStart:
+    exec:
+      command:
+        - busybox
+        - crond
 volumeMounts:
   - mountPath: /nextcloud
     name: nextcloud-storage
