@@ -4,7 +4,7 @@ strategy: Recreate
 image:
   repository: linuxserver/nzbget
   imagePullPolicy: IfNotPresent
-  tag: version-v21.1
+  tag: 21.1.20220707
 ports:
   - containerPort: 6789
     protocol: TCP
