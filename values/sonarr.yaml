@@ -4,7 +4,7 @@ strategy: Recreate
 image:
   repository: linuxserver/sonarr
   imagePullPolicy: IfNotPresent
-  tag: version-3.0.9.1549
+  tag: v4-version-4.0.0.141
 ports:
   - containerPort: 8989
     protocol: TCP
