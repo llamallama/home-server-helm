@@ -1,17 +1,17 @@
-name: nzbget
+name: sabnzbd
 replicas: 1
 strategy: Recreate
 image:
-  repository: linuxserver/nzbget
+  repository: linuxserver/sabnzbd
   imagePullPolicy: IfNotPresent
-  tag: latest
+  tag: 3.7.2
 ports:
-  - containerPort: 6789
+  - containerPort: 8080
     protocol: TCP
 volumeMounts:
   - name: config
     mountPath: /config
-    subPath: nzbget/config
+    subPath: sabnzbd/config
   - name: downloads
     mountPath: /downloads
 volumes:
@@ -32,19 +32,20 @@ resources:
   limits:
     cpu: 500m
 ingress:
-  enabled: true
-  annotations:
-    kubernetes.io/ingress.class: traefik
-    cert-manager.io/cluster-issuer: letsencrypt-prod
-  hosts:
-    - host: download.pipetogrep.org
-      paths:
-        - path: /
-          pathType: Prefix
-          port: 6789
-  tls:
-    - secretName: download-pipetogrep-org-tls
-      hosts:
-        - download.pipetogrep.org
+  enabled: false
+  # annotations:
+  #   kubernetes.io/ingress.class: traefik
+  #   cert-manager.io/cluster-issuer: letsencrypt-prod
+  # hosts:
+  #   - host: download.pipetogrep.org
+  #     paths:
+  #       - path: /
+  #         pathType: Prefix
+  #         port: 6789
+  # tls:
+  #   - secretName: download-pipetogrep-org-tls
+  #     hosts:
+  #       - download.pipetogrep.org
 pvc:
   enabled: false
+
