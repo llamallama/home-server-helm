@@ -3,8 +3,8 @@ replicas: 1
 strategy: Recreate
 image:
   repository: linuxserver/radarr
-  imagePullPolicy: IfNotPresent
-  tag: 4.4.2-develop
+  imagePullPolicy: Always
+  tag: 4.4.4-develop
 ports:
   - containerPort: 7878
     protocol: TCP

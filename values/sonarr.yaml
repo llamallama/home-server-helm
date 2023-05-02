@@ -3,7 +3,7 @@ replicas: 1
 strategy: Recreate
 image:
   repository: linuxserver/sonarr
-  imagePullPolicy: IfNotPresent
+  imagePullPolicy: Always
   tag: 4.0.0-develop
 ports:
   - containerPort: 8989
