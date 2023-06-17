@@ -1,0 +1,70 @@
+name: vaultwarden
+replicas: 1
+strategy: Recreate
+image:
+  repository: vaultwarden/server
+  imagePullPolicy: Always
+  tag: 1.28.1
+ports:
+  - containerPort: 80
+    protocol: TCP
+volumeMounts:
+  - mountPath: /data
+    name: longhorn
+volumes:
+  - name: longhorn
+    persistentVolumeClaim:
+      claimName: longhorn-vaultwarden
+env:
+  - name: DOMAIN
+    value: https://vault.pipetogrep.org
+  - name: INVITATION_ORG_NAME
+    value: pipetogrep.org
+  - name: WEBSOCKET_ENABLED
+    value: "true"
+  - name: SIGNUPS_ALLOWED
+    value: "false"
+  - name: ADMIN_TOKEN
+    valueFrom:
+      secretKeyRef:
+        name: vaultwarden
+        key: admintoken
+  - name: SMTP_FROM
+    value: vaultwarden@pipetogrep.org
+  - name: SMTP_HOST
+    valueFrom:
+      secretKeyRef:
+        name: smtp
+        key: host
+  - name: SMTP_USERNAME
+    valueFrom:
+      secretKeyRef:
+        name: smtp
+        key: user
+  - name: SMTP_PASSWORD
+    valueFrom:
+      secretKeyRef:
+        name: smtp
+        key: password
+ingress:
+  enabled: true
+  annotations:
+    kubernetes.io/ingress.class: traefik
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+  hosts:
+    - host: vault.pipetogrep.org
+      paths:
+        - path: /
+          pathType: Prefix
+          port: 80
+  tls:
+    - secretName: vault-pipetogrep-org-tls
+      hosts:
+        - vault.pipetogrep.org
+pvc:
+  enabled: true
+  name: longhorn-vaultwarden
+  storageClassName: longhorn
+  size: 2Gi
+  accessModes:
+    - ReadWriteOnce
