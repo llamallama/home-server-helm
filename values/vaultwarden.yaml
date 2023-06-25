@@ -8,6 +8,8 @@ image:
 ports:
   - containerPort: 80
     protocol: TCP
+  - containerPort: 3012
+    protocol: TCP
 volumeMounts:
   - mountPath: /data
     name: longhorn
@@ -57,6 +59,12 @@ ingress:
         - path: /
           pathType: Prefix
           port: 80
+        - path: /notifications/hub/negotiate
+          pathType: Prefix
+          port: 80
+        - path: /notifications/hub
+          pathType: Prefix
+          port: 3012
   tls:
     - secretName: vault-pipetogrep-org-tls
       hosts:
