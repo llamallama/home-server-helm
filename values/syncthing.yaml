@@ -1,5 +1,4 @@
 name: syncthing
-nodeName: k3s-node1
 replicas: 1
 strategy: Recreate
 image:
