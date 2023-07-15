@@ -4,11 +4,9 @@ strategy: Recreate
 image:
   repository: vaultwarden/server
   imagePullPolicy: Always
-  tag: 1.28.1
+  tag: 1.29.0
 ports:
   - containerPort: 80
-    protocol: TCP
-  - containerPort: 3012
     protocol: TCP
 volumeMounts:
   - mountPath: /data
@@ -22,8 +20,6 @@ env:
     value: https://vault.pipetogrep.org
   - name: INVITATION_ORG_NAME
     value: pipetogrep.org
-  - name: WEBSOCKET_ENABLED
-    value: "true"
   - name: SIGNUPS_ALLOWED
     value: "false"
   - name: ADMIN_TOKEN
@@ -59,12 +55,6 @@ ingress:
         - path: /
           pathType: Prefix
           port: 80
-        - path: /notifications/hub/negotiate
-          pathType: Prefix
-          port: 80
-        - path: /notifications/hub
-          pathType: Prefix
-          port: 3012
   tls:
     - secretName: vault-pipetogrep-org-tls
       hosts:
