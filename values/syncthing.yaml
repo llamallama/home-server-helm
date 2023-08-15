@@ -1,10 +1,11 @@
 name: syncthing
+nodeName: k3s-node1m
 replicas: 1
 strategy: Recreate
 image:
   repository: linuxserver/syncthing
   imagePullPolicy: Always
-  tag: 1.23.4
+  tag: 1.23.6
 ports:
   - containerPort: 22000
     hostPort: 22000
