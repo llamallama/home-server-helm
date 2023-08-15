@@ -4,7 +4,7 @@ strategy: Recreate
 image:
   repository: vaultwarden/server
   imagePullPolicy: Always
-  tag: 1.29.0
+  tag: 1.29.1
 ports:
   - containerPort: 80
     protocol: TCP
