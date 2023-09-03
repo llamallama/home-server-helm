@@ -29,7 +29,7 @@ env:
   - name: TZ
     value: America/New_York
 resources:
-  limits:
+  requests:
     cpu: 500m
 ingress:
   enabled: false
