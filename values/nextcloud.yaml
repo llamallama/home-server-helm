@@ -4,7 +4,7 @@ strategy: Recreate
 image:
   repository: nextcloud
   imagePullPolicy: IfNotPresent
-  tag: 27.0.2
+  tag: 27.1.1
 ports:
   - containerPort: 80
     name: tcp80
