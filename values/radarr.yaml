@@ -4,7 +4,7 @@ strategy: Recreate
 image:
   repository: linuxserver/radarr
   imagePullPolicy: Always
-  tag: 4.7.5
+  tag: version-5.0.3.8127
 ports:
   - containerPort: 7878
     protocol: TCP
