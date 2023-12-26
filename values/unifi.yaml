@@ -5,7 +5,7 @@ strategy: Recreate
 image:
   repository: linuxserver/unifi-controller
   imagePullPolicy: IfNotPresent
-  tag: 7.4.162
+  tag: 8.0.24
 strategy: Recreate
 ports:
   - containerPort: 3478
