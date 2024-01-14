@@ -13,8 +13,12 @@ lifecycle:
   postStart:
     exec:
       command:
-        - busybox
-        - crond
+        - "sh"
+        - "-c"
+        - >
+          echo '0 0 * * * su www-data -s /bin/bash -c "/var/www/html/occ preview:pre-generate"' > /var/spool/cron/crontabs/generate-previews;
+          chmod +x /var/spool/crontabs/generate-previews;
+          busybox crond
 volumeMounts:
   - mountPath: /nextcloud
     name: nextcloud-storage
@@ -57,6 +61,7 @@ ingress:
 pvc:
   enabled: true
   name: longhorn-nextcloud
+  size: 30Gi
   storageClassName: longhorn
   accessModes:
     - ReadWriteOnce
