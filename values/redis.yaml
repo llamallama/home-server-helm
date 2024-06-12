@@ -1,0 +1,16 @@
+name: redis
+replicas: 1
+strategy: Recreate
+image:
+  repository: redis
+  imagePullPolicy: Always
+  tag: 7.0.15
+ports:
+  - containerPort: 6379
+    protocol: TCP
+ingress:
+  enabled: false
+pvc:
+  enabled: false
+
+
