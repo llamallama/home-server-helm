@@ -4,7 +4,7 @@ strategy: Recreate
 image:
   repository: nextcloud
   imagePullPolicy: IfNotPresent
-  tag: 29.0.1
+  tag: 29.0.3
 ports:
   - containerPort: 80
     name: tcp80
@@ -16,6 +16,8 @@ lifecycle:
         - "sh"
         - "-c"
         - >
+          apt-get update;
+          apt-get install -y imagemagick;
           echo '0 0 * * * su www-data -s /bin/bash -c "/var/www/html/occ preview:pre-generate"' > /var/spool/cron/crontabs/generate-previews;
           chmod +x /var/spool/crontabs/generate-previews;
           busybox crond
