@@ -48,6 +48,16 @@ do
   fi
 done
 
+# Deploy middleware changes
+for yaml in middlewares/*.yaml
+do
+  if ! compare_hash "$yaml" ]]
+  then
+    kubectl apply -f "$yaml"
+    made_changes=true
+  fi
+done
+
 if [[ "${made_changes:-}" ]]
 then
   new_hashes="$(find . -type f -name '*.yaml' -exec shasum {} \+)"
