@@ -4,7 +4,7 @@ strategy: Recreate
 image:
   repository: redis
   imagePullPolicy: Always
-  tag: 7.0.15
+  tag: 7.2.5
 ports:
   - containerPort: 6379
     protocol: TCP
