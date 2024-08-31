@@ -17,9 +17,8 @@ lifecycle:
         - "-c"
         - >
           apt-get update;
-          apt-get install -y imagemagick;
-          echo '0 0 * * * su www-data -s /bin/bash -c "/var/www/html/occ preview:pre-generate"' > /var/spool/cron/crontabs/generate-previews;
-          chmod +x /var/spool/crontabs/generate-previews;
+          apt-get install -y imagemagick ffmpeg;
+          echo '0 0 * * * su www-data -s /bin/bash -c "/var/www/html/occ preview:pre-generate"' >> /var/spool/cron/crontabs/www-data;
           busybox crond
 volumeMounts:
   - mountPath: /nextcloud
